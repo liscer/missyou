@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
-@ToString(exclude = {"skuList","spuImgList","rootCategory","category"})
+@ToString
 public class SpuDTO {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

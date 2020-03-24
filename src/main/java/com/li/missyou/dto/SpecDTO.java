@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
-
+@ToString
 public class SpecDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

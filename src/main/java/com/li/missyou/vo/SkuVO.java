@@ -1,6 +1,7 @@
 package com.li.missyou.vo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -15,11 +16,10 @@ public class SkuVO {
     private Long id;
     private BigDecimal price;
     private BigDecimal discountPrice;
-    private Boolean online = false;
+    private Boolean onLine = false;
     private String img;
     private String title;
-    //@JsonBackReference
-    private List<SpecVO> specList;
+    @JsonProperty("specs") private List<SpecVO> specList;
     private Long stock;
     private Long spuId;
     private String code;

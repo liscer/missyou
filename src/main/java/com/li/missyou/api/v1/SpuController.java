@@ -16,7 +16,6 @@ public class SpuController {
 
     @RequestMapping("/id/{id}/detail")
     public SpuDetailVO getSpuDetail(@PathVariable @NonNull Long id){
-        SpuDetailVO spuDetailVO = spuService.getSpuDetailByID(id);
-        return spuDetailVO;
+        return spuService.getSpuDetailByID(id);
     }
 }

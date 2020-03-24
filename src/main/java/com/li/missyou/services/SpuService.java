@@ -5,9 +5,11 @@ import com.li.missyou.dao.SpuRepository;
 import com.li.missyou.dto.SkuDTO;
 import com.li.missyou.dto.SpecDTO;
 import com.li.missyou.dto.SpuDTO;
+import com.li.missyou.dto.SpuImgDTO;
 import com.li.missyou.vo.SkuVO;
 import com.li.missyou.vo.SpecVO;
 import com.li.missyou.vo.SpuDetailVO;
+import com.li.missyou.vo.SpuImgVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +33,22 @@ public class SpuService {
         }
         SpuDTO spu = result.get();
         List<SkuVO> skuVOList = handleSku(spu.getSkuList());
+        List<SpuImgVO> spuImgVOList = handleSpuImg(spu.getSpuImgList());
         SpuDetailVO spuDetailVO = new SpuDetailVO(spu.getId(), spu.getTitle(), spu.getSubtitle(),
                 spu.getRootCategory().getId(), spu.getCategory().getId(), spu.getPrice(), spu.getImg(), spu.getForThemeImg(),
-                spu.getDiscountPrice(), spu.getTags(), spu.getIsTest(), spu.getOnline(), skuVOList, spu.getSpuImgList(),
+                spu.getDiscountPrice(), spu.getTags(), spu.getIsTest(), spu.getOnline(), skuVOList, spuImgVOList,
                 spu.getSketchSpecId(), spu.getDefaultSkuId());
         return spuDetailVO;
+    }
+
+    private List<SpuImgVO> handleSpuImg(List<SpuImgDTO> spuImgList) {
+        List<SpuImgVO> spuImgVOList = new ArrayList<>();
+        for (SpuImgDTO s :
+                spuImgList) {
+            SpuImgVO spuImgVO = new SpuImgVO(s.getId(), s.getImg(), s.getSpu().getId());
+            spuImgVOList.add(spuImgVO);
+        }
+        return spuImgVOList;
     }
 
     private List<SkuVO> handleSku(List<SkuDTO> skuList) {

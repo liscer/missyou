@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
-@ToString(exclude = {"spu","specs"})
+@ToString(exclude = {"spu"})
 public class SkuDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

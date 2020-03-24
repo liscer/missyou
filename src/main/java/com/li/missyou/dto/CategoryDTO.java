@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
+@ToString
 public class CategoryDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
