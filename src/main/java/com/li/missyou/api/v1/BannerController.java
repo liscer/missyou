@@ -22,6 +22,11 @@ public class BannerController {
         return bannerService.findBannerByName(name);
     }
 
+    @RequestMapping("/id/{id}")
+    public BannerDTO getBannerById(@PathVariable @NonNull Long id){
+        return bannerService.findBannerById(id);
+    }
+
 //    @RequestMapping(value = "test")
 //    public String test(@RequestBody @Validated PersionDTO p,
 //                       @RequestParam @Max(value = 10) Integer s)  {

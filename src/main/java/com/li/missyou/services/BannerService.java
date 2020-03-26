@@ -16,4 +16,9 @@ public class BannerService {
         Optional<BannerDTO> result = bannerRepository.findByName(name);
         return result.orElse(null);
     }
+
+    public BannerDTO findBannerById(Long id) {
+        Optional<BannerDTO> result = bannerRepository.findById(id);
+        return result.orElse(null);
+    }
 }

@@ -20,7 +20,7 @@ public class SpuDetailVO {
     private String title;
     private String subtitle;
     private Long rootCategoryId;
-     private Long categoryId;
+    private Long categoryId;
     private BigDecimal price;
     private String img;
     private String forThemeImg;
@@ -32,6 +32,5 @@ public class SpuDetailVO {
     private List<SpuImgVO> spuImgList;
     private Long sketchSpecId;
     private Long defaultSkuId;
-
 
 }

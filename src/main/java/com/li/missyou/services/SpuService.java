@@ -6,11 +6,11 @@ import com.li.missyou.dto.SkuDTO;
 import com.li.missyou.dto.SpecDTO;
 import com.li.missyou.dto.SpuDTO;
 import com.li.missyou.dto.SpuImgDTO;
-import com.li.missyou.vo.SkuVO;
-import com.li.missyou.vo.SpecVO;
-import com.li.missyou.vo.SpuDetailVO;
-import com.li.missyou.vo.SpuImgVO;
+import com.li.missyou.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,7 +27,6 @@ public class SpuService {
 
     public SpuDetailVO getSpuDetailByID(Long id) {
         Optional<SpuDTO> result = spuRepository.findById(id);
-
         if (!result.isPresent()) {
             return null;
         }
@@ -39,6 +38,25 @@ public class SpuService {
                 spu.getDiscountPrice(), spu.getTags(), spu.getIsTest(), spu.getOnline(), skuVOList, spuImgVOList,
                 spu.getSketchSpecId(), spu.getDefaultSkuId());
         return spuDetailVO;
+    }
+
+    public PagingVO getSpuLatest(Integer start, Integer count) {
+        PageRequest pageRequest = PageRequest.of(start, count, Sort.unsorted());
+        Page<SpuDTO> pages = spuRepository.findAll(pageRequest);
+        return handlePaging(pages,start);
+    }
+
+    private PagingVO handlePaging(Page<SpuDTO> pages,Integer start) {
+        List<SpuPageVO> spuPageVOList = new ArrayList<>();
+        for (SpuDTO s :
+                pages.getContent()) {
+            SpuPageVO spuPageVO = new SpuPageVO(s.getId(),s.getTitle(),s.getSubtitle(),s.getPrice(),
+                    s.getImg(),s.getForThemeImg(),s.getDiscountPrice(),s.getTags(),s.getSketchSpecId(),
+                    null,null);
+            spuPageVOList.add(spuPageVO);
+        }
+        return new PagingVO(pages.getTotalElements(), pages.getSize(), start,
+                pages.getTotalPages(), spuPageVOList);
     }
 
     private List<SpuImgVO> handleSpuImg(List<SpuImgDTO> spuImgList) {
@@ -99,5 +117,6 @@ public class SpuService {
         }
         return null;
     }
+
 
 }

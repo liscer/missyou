@@ -115,7 +115,52 @@ public class SpuDTOTest {
         value2.setParentId(key2.getId());
         specsRepository.save(value2);
         skuRepository.save(sku);
+
     }
+
+    @Test
+    public void insertManySpu() {
+        for (int i = 0; i <= 10; i++) {
+            insertSeoundSpu();
+        }
+
+    }
+
+    private void insertSeoundSpu(){
+        CategoryDTO rootCategory = categoryRepository.findById(1L).get();
+        CategoryDTO subCategory = categoryRepository.findById(2L).get();
+
+        SpecDTO key = specsRepository.findByValue("颜色").get();
+        SpecDTO key1 = specsRepository.findByValue("图案").get();
+        SpecDTO key2 = specsRepository.findByValue("尺码").get();
+        SpecDTO value = specsRepository.findByValue("青芒色").get();
+        SpecDTO value1 = specsRepository.findByValue("灌篮高手").get();
+        SpecDTO value2 = specsRepository.findByValue("中号 M").get();;
+        SpuDTO spu = new SpuDTO("林间有风自营针织衫", "瓜瓜设计三件包邮", new BigDecimal("77.0"),
+                "img", "themeimg", new BigDecimal("67.0"), "tags",
+                new ArrayList<>(), new ArrayList<>(), rootCategory, subCategory, 1L, 2L);
+        SkuDTO sku = new SkuDTO(new BigDecimal("76.0"), new BigDecimal("44.0"), "img",
+                "金属灰,七龙珠", 6L, "code");
+
+        List<SpecDTO> specs = new ArrayList<>();
+        specs.add(key);
+        specs.add(key1);
+        specs.add(key2);
+        specs.add(value);
+        specs.add(value1);
+        specs.add(value2);
+        sku.setSpecs(specs);
+        spu.getSkuList().add(sku);
+        sku.setSpu(spu);
+        SpuImgDTO spuImg = new SpuImgDTO("img");
+        spu.getSpuImgList().add(spuImg);
+        spuImg.setSpu(spu);
+
+        spuRepository.save(spu);
+        skuRepository.save(sku);
+        spuImgRepositroy.save(spuImg);
+    }
+
 
     @Test
     public void findSpu() {
