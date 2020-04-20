@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
-@ConfigurationProperties(prefix = "li")
+@ConfigurationProperties(prefix = "lin")
 @PropertySource(value = "classpath:config/exception-code.properties")
 @Component
 public class ExceptionCodeConfiguration {
